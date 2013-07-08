@@ -13,11 +13,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with MAILBOOT.  If not, see <http://www.gnu.org/licenses/>.
 
-EXTRA_DIST = mailboot.in mailboot.service.in
+EXTRA_DIST = mailboot.in mailboot.service.in PKGBUILD.in
 
-CLEANFILES = mailboot mailboot.service
+CLEANFILES = mailboot mailboot.service PKGBUILD
 
 bin_SCRIPTS = mailboot
+noinst_SCRIPTS = PKGBUILD
 dist_doc_DATA = README COPYRIGHT LICENSE AUTHORS
 systemdunit_DATA = mailboot.service
 
@@ -28,6 +29,9 @@ mailboot: mailboot.in
 mailboot.service: mailboot.service.in
 	$(do_substitution) < $(srcdir)/$< > $@
 
+PKGBUILD: PKGBUILD.in
+	$(do_substitution) < $(srcdir)/$< > $@
+
 do_substitution = $(SED) \
 	-e 's,[@]bindir[@],$(bindir),g' \
 	-e 's,[@]PACKAGE[@],$(PACKAGE),g' \
@@ -36,9 +40,8 @@ do_substitution = $(SED) \
 check: mailboot
 	./mailboot -p
 
-#install-exec-hook: mailboot.service
-#	install -dm755 $(DESTDIR)$(systemdunitdir)
-#	install -m644 mailboot.service $(DESTDIR)$(systemdunitdir)/mailboot.service
+arch: PKGBUILD
+	makepkg -f
 
 dist-hook:
 	rm -f $(distdir)/TODO

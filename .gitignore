@@ -1,7 +1,7 @@
 .*.swp
 *~
 TODO
-*.in
 Makefile
+Makefile.in
 *.tar.xz
 configure
