@@ -1,0 +1,7 @@
+.*.swp
+*~
+TODO
+*.in
+Makefile
+*.tar.xz
+configure

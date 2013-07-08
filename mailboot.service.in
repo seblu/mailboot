@@ -1,0 +1,11 @@
+[Unit]
+Description=Send report mail at boot
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=@bindir@/mailboot -s
+
+[Install]
+WantedBy=multi-user.target

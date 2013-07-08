@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# This file is part of MAILBOOT.
+#
+# MAILBOOT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# MAILBOOT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with MAILBOOT.  If not, see <http://www.gnu.org/licenses/>.
+
+VERSION=@VERSION@
+
+usage() {
+    echo "usage: ${0##*/} [options]" >&2
+    echo 'options:' >&2
+    echo "   -s: send the mail" >&2
+    echo "   -p: print the mail to stdout" >&2
+    echo "   -h: this help" >&2
+    echo "   -v: print mailboot version" >&2
+    exit ${1:-1}
+}
+
+print_version() {
+    echo $VERSION
+}
+
+print_mail() {
+    source /etc/os-release
+
+    echo "To: \"$(getent passwd root|cut -f5 -d:)\" <root>"
+    echo "Subject: [MAILBOOT] $(hostname -f)"
+    echo
+    echo "Operating system is $NAME"
+    echo "Kernel is $(uname -s) $(uname -r) on $(uname -m)"
+    echo
+    echo "Current time is $(date -R)"
+    echo "System is up since $(uptime -s)"
+    echo
+    echo "$(systemd-analyze)"
+}
+
+
+send_mail() {
+    print_mail | sendmail root
+}
+
+while getopts 'psvh' opt; do
+    case $opt in
+        s) send_mail;;
+        p) print_mail;;
+        v) print_version;;
+        h) usage 0;;
+        *) usage;;
+    esac
+done
+
+(( $OPTIND != 1 )) || usage
+
+# vim:set ts=4 sw=4 ft=sh et:
