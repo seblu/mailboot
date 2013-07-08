@@ -19,7 +19,7 @@ CLEANFILES = mailboot mailboot.service PKGBUILD
 
 bin_SCRIPTS = mailboot
 noinst_SCRIPTS = PKGBUILD
-dist_doc_DATA = README COPYRIGHT LICENSE AUTHORS
+dist_doc_DATA = README.rst COPYRIGHT LICENSE AUTHORS
 systemdunit_DATA = mailboot.service
 
 mailboot: mailboot.in
