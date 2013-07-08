@@ -28,7 +28,8 @@ How to install?
 ---------------
 ::
 
-  $ ./autogen.sh -m
+  $ ./autogen.sh
+  $ ./configure
   $ make install
   $ /usr/local/bin/mailboot
 
