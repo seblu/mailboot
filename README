@@ -44,6 +44,11 @@ DEPENDENCIES
 - Systemd [#]_
 
 
+RELEASES
+========
+You can download *MAILBOOT* release tarballs on my ftp: [#]_.
+
+
 SOURCES
 =======
 *MAILBOOT* sources are available on github [#]_.
@@ -63,5 +68,6 @@ LINKS
 =====
 .. [#] http://www.gnu.org/software/bash/
 .. [#] http://www.freedesktop.org/wiki/Software/systemd/
+.. [#] http://ftp.seblu.net/softs/mailboot/
 .. [#] https://github.com/seblu/rebootmail/
 .. [#] http://www.gnu.org/licenses/gpl-2.0.html
