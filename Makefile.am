@@ -34,7 +34,6 @@ PKGBUILD: PKGBUILD.in
 
 do_substitution = $(SED) \
 	-e 's,[@]bindir[@],$(bindir),g' \
-	-e 's,[@]PACKAGE[@],$(PACKAGE),g' \
 	-e 's,[@]VERSION[@],$(VERSION),g'
 
 check: mailboot
