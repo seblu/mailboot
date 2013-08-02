@@ -41,7 +41,7 @@ print_mail() {
     echo "Kernel is $(uname -s) $(uname -r) on $(uname -m)"
     echo
     echo "Current time is $(date -R)"
-    echo "System is up since $(uptime -s)"
+    echo "System is up since $(date -d "$(uptime -s)" -R)"
     echo
     echo "$(systemd-analyze)"
 }
