@@ -51,7 +51,7 @@ print_mail() {
 
 
 send_mail() {
-    print_mail | sendmail root
+    print_mail | sed 's/$/\r/' | sendmail root
 }
 
 while getopts 'psvh' opt; do

@@ -7,7 +7,7 @@ pkgdesc='Send an email when your computer boot'
 arch=('any')
 url='https://github.com/seblu/mailboot'
 license=('GPL')
-depends=('bash' 'systemd')
+depends=('bash' 'systemd' 'sed')
 source=("$pkgname-$pkgver.tar.xz")
 md5sums=('SKIP')
 
