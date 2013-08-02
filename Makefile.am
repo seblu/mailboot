@@ -23,6 +23,11 @@ dist_doc_DATA = README.rst COPYRIGHT LICENSE AUTHORS
 systemdunit_DATA = mailboot.service
 dist_sysconf_DATA = mailboot.conf
 
+do_substitution = $(SED) \
+	-e 's,[@]bindir[@],$(bindir),g' \
+	-e 's,[@]sysconfdir[@],$(sysconfdir),g' \
+	-e 's,[@]VERSION[@],$(VERSION),g'
+
 mailboot: mailboot.in
 	$(do_substitution) < $(srcdir)/$< > $@
 	chmod +x $@
@@ -30,18 +35,14 @@ mailboot: mailboot.in
 mailboot.service: mailboot.service.in
 	$(do_substitution) < $(srcdir)/$< > $@
 
-PKGBUILD: PKGBUILD.in
+# version is defined in configure, so PKGBUILD depends of configure
+PKGBUILD: PKGBUILD.in configure
 	$(do_substitution) < $(srcdir)/$< > $@
-
-do_substitution = $(SED) \
-	-e 's,[@]bindir[@],$(bindir),g' \
-	-e 's,[@]sysconfdir[@],$(sysconfdir),g' \
-	-e 's,[@]VERSION[@],$(VERSION),g'
 
 check: mailboot
 	./mailboot -p
 
-arch: PKGBUILD
+arch: PKGBUILD dist
 	makepkg -f
 
 dist-hook:
