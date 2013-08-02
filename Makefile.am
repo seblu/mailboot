@@ -21,6 +21,7 @@ bin_SCRIPTS = mailboot
 noinst_SCRIPTS = PKGBUILD
 dist_doc_DATA = README.rst COPYRIGHT LICENSE AUTHORS
 systemdunit_DATA = mailboot.service
+dist_sysconf_DATA = mailboot.conf
 
 mailboot: mailboot.in
 	$(do_substitution) < $(srcdir)/$< > $@
@@ -34,6 +35,7 @@ PKGBUILD: PKGBUILD.in
 
 do_substitution = $(SED) \
 	-e 's,[@]bindir[@],$(bindir),g' \
+	-e 's,[@]sysconfdir[@],$(sysconfdir),g' \
 	-e 's,[@]VERSION[@],$(VERSION),g'
 
 check: mailboot

@@ -8,12 +8,13 @@ arch=('any')
 url='https://github.com/seblu/mailboot'
 license=('GPL')
 depends=('bash' 'systemd' 'sed')
+backup=('etc/mailboot.conf')
 source=("$pkgname-$pkgver.tar.xz")
 md5sums=('SKIP')
 
 build() {
   cd $pkgname-$pkgver
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr --sysconfdir=/etc
   make
 }
 
