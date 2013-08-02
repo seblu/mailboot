@@ -44,6 +44,9 @@ print_mail() {
     echo "System is up since $(date -d "$(uptime -s)" -R)"
     echo
     echo "$(systemd-analyze)"
+    echo
+    echo 'Last:'
+    last -5 -FRwx|head -n 5
 }
 
 

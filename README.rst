@@ -51,6 +51,7 @@ DEPENDENCIES
 ============
 - Bash [#]_
 - Systemd [#]_
+- sysvinit-tools
 
 
 INSTALL
