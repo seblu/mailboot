@@ -49,13 +49,15 @@ print_mail() {
     echo "Operating system is $NAME"
     echo "Kernel is $(uname -s) $(uname -r) on $(uname -m)"
     echo
-    echo "Current time is $(date -R)"
     echo "System is up since $(date -d "$(uptime -s)" -R)"
     echo
     echo "$(systemd-analyze)"
     echo
     echo 'Last:'
     last -5 -FRwx|head -n 5
+    echo
+    printf 'Generated '
+    date -R
 }
 
 send_mail() {
