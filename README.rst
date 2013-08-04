@@ -51,8 +51,8 @@ DEPENDENCIES
 ============
 - Bash [#]_
 - Systemd [#]_
-- sysvinit-tools
-- Sed
+- sysvinit-tools [#]_
+- Sed [#]_
 
 
 INSTALL
@@ -107,6 +107,8 @@ LINKS
 =====
 .. [#] http://www.gnu.org/software/bash/
 .. [#] http://www.freedesktop.org/wiki/Software/systemd/
+.. [#] http://savannah.nongnu.org/projects/sysvinit
+.. [#] http://www.gnu.org/software/sed
 .. [#] http://ftp.seblu.net/softs/mailboot/
 .. [#] https://aur.archlinux.org/packages/mailboot/
 .. [#] https://github.com/seblu/mailboot/
