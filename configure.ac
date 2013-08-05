@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with MAILBOOT.  If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([mailboot], [2], [seblu@seblu.net])
+AC_INIT([mailboot], [3], [seblu@seblu.net])
 
 AM_INIT_AUTOMAKE([foreign dist-xz no-dist-gzip])
 
