@@ -18,7 +18,9 @@
 VERSION=@VERSION@
 
 # default settings
-targets=('root')
+declare -a targets=('root')
+declare -i systemd_analyze_retry=10
+declare -i systemd_analyze_interval=5
 
 # source config file if exists
 [[ -r @sysconfdir@/mailboot.conf ]] && source @sysconfdir@/mailboot.conf
@@ -37,6 +39,22 @@ print_version() {
     echo $VERSION
 }
 
+# systemd-analyse detects if systemd has finished to boot up
+# we try during 60s to have a valid answer.
+print_systemd-analyze() {
+    declare -i count=0
+    while (($count <= $systemd_analyze_retry)); do
+        if systemd-analyze &>/dev/null; then
+            echo
+            systemd-analyze
+            echo
+            return
+        fi
+        count+=1
+        sleep $systemd_analyze_interval
+    done
+}
+
 print_mail() {
     source /etc/os-release
 
@@ -50,9 +68,7 @@ print_mail() {
     echo "Kernel is $(uname -s) $(uname -r) on $(uname -m)"
     echo
     echo "System is up since $(date -d "$(uptime -s)" -R)"
-    echo
-    echo "$(systemd-analyze)"
-    echo
+    print_systemd-analyze
     echo 'Last:'
     last -5 -FRwx|head -n 5
     echo
